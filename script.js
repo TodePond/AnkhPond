@@ -34,14 +34,16 @@ const io = makePart({
 		const {width, height} = canvas
 		return {
 			x: context.canvas.width - (ratio * (width+berd.width)),
-			y: height/2 + Math.cos(0.5)*100 + Math.cos(time)*100,
+			y: height/3*1.35 + Math.cos(0.5)*100 + Math.cos(time)*100,
 			rotation: -ratio*2 + Math.PI/4,
+			scale: [1.2, 1.2],
 		}
 	}
 })
 
 const sequence = makePart({
 	sprite: tode,
+	particleCount: 20,
 	placer: ({context, time, ratio}) => {
 		const {canvas} = context
 		const {width, height} = canvas
@@ -49,27 +51,29 @@ const sequence = makePart({
 		const size = 200
 		const rotation = time*speed
 		const centerX = width/2 - tode.width/2
-		const centerY = height/4
+		const centerY = height/5
 		return {
-			x: centerX - Math.sin(-rotation) * size,
-			y: centerY - Math.cos(-rotation) * size,
+			x: centerX - Math.sin(-rotation) * size * 1.2,
+			y: centerY - Math.cos(-rotation) * size * 1.2,
 			rotation: rotation + Math.PI,
-			scale: [1, 1],
+			scale: [1.2, 1.2],
 		}
 	}
 })
 
 const judge = makePart({
-	sprite: bot,
+	sprite: tode,
+	particleCount: 35,
 	placer: ({context, time, ratio, sprite}) => {
 		const {canvas} = context
 		const {width, height} = canvas
 		const centerX = width/2 - sprite.width/2
-		const centerY = 3*height/4 - sprite.height/3
+		const centerY = 3*height/4 - sprite.height/2
 		return {
-			x: centerX + Math.cos(time)*150,
-			y: centerY + Math.sin(time*2)*175,
+			x: centerX + Math.cos(time)*150*1.3,
+			y: centerY + Math.sin(time*2)*175*1.5,
 			rotation: 0,
+			scale: [1.2, 1.2],
 		}
 	}
 })
